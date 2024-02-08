@@ -39,13 +39,13 @@ class UserTest extends TestCase
             ->assertJson([
                 "errors" => [
                     'username' => [
-                        "The username field is required"
+                        "The username field is required."
                     ],
                     'password' => [
-                        "The password field is required"
+                        "The password field is required."
                     ],
                     'name' => [
-                        "The name field is required"
+                        "The name field is required."
                     ],
                 ]
             ]);
@@ -62,9 +62,10 @@ class UserTest extends TestCase
         ]);
         $response->assertStatus(400)
             ->assertJson([
-                "data" => [
-                    'username' => 'bento',
-                    'name' => 'bento lokal'
+                "errors" => [
+                    'username' => [
+                        'username already registered'
+                    ]
                 ]
             ]);
     }
@@ -80,7 +81,7 @@ class UserTest extends TestCase
             ->assertJson([
                 'data' => [
                     'username' => 'test',
-                    'password' => 'test',
+                    'name' => 'test',
                 ]
             ]);
         $user = User::where('username', 'test')->first();
@@ -97,7 +98,7 @@ class UserTest extends TestCase
         $response->assertStatus(401)
             ->assertJson([
                 'errors' => [
-                    'message' => [
+                    'messages' => [
                         "username or password wrong"
                     ]
                 ]

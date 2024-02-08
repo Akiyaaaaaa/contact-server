@@ -47,7 +47,7 @@ class UserController extends Controller
             throw new HttpResponseException(response([
                 "errors" => [
                     "messages" => [
-                        "username or password wrond"
+                        "username or password wrong"
                     ]
                 ]
             ], 401));
